@@ -1,3 +1,4 @@
+![Churinga Banner](churinga-head.png)
 # Churinga
 
 **A fragment of soul, brought to life in code.**
