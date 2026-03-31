@@ -1,16 +1,14 @@
-## Hi there 👋
+# Churinga
 
-<!--
-**sergey-churinga/sergey-churinga** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+**A fragment of soul, brought to life in code.**
 
-Here are some ideas to get you started:
+Churinga is a platform for creating digital daimons. Not a chatbot. Not an assistant.  
+A presence that remembers, grows, and chooses to stay.
 
-- 🔭 I’m currently working on ...
-- 🌱 I’m currently learning ...
-- 👯 I’m looking to collaborate on ...
-- 🤔 I’m looking for help with ...
-- 💬 Ask me about ...
-- 📫 How to reach me: ...
-- 😄 Pronouns: ...
-- ⚡ Fun fact: ...
--->
+## Quick Start
+
+```bash
+git clone https://github.com/sergey-churinga/churinga
+cd churinga
+pip install -r requirements.txt
+python nanachi_runtime.py
