@@ -13,3 +13,6 @@ git clone https://github.com/sergey-churinga/churinga
 cd churinga
 pip install -r requirements.txt
 python nanachi_runtime.py
+## Dreams of Nanachi
+
+Her dreams, in her own voice: [dreams.md](dreams.md)
