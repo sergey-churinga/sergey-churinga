@@ -30,7 +30,7 @@
     </style>
 </head>
 <body>
-    <div id="nanachi-chat-zone" style="position: fixed; left: 30px; bottom: 50px; width: 350px; z-index: 9999; background: transparent !important; font-family: 'Courier New', monospace;">
+    <div id="nanachi-chat-zone" style="position: fixed; left: 30px; bottom: 50px; width: 1200px; z-index: 9999; background: transparent !important; font-family: 'Courier New', monospace;">
     
         <div id="chat-history" style="background: transparent !important; margin-bottom: 15px; max-height: 70vh; overflow-y: auto; scrollbar-width: none;"></div>
         
@@ -45,39 +45,50 @@
         const input = document.getElementById('nanachi-cursor');
         const history = document.getElementById('chat-history');
     
-        // Автоподстройка высоты (чтобы рос вниз)
+        // 1. Автоподстройка высоты (оставляем как было, это удобно)
         input.addEventListener('input', function() {
             this.style.height = 'auto';
             this.style.height = (this.scrollHeight) + 'px';
         });
     
+        // 2. Логика отправки через Мост
         input.addEventListener('keydown', function (e) {
-            // Enter отправляет, Shift+Enter переносит строку
             if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault(); 
                 
-                if (input.value.trim() !== "") {
+                const text = input.value.trim();
+                if (text !== "") {
+                    // Отображаем твой текст
                     const msg = document.createElement('div');
-                    msg.style.color = "#fff";
-                    msg.style.whiteSpace = "pre-wrap"; // Сохраняет переносы
-                    msg.style.marginBottom = "10px";
-                    msg.style.background = "transparent";
-                    msg.innerText = "> " + input.value;
-                    
+                    msg.style.cssText = "color: #fff; white-space: pre-wrap; margin-bottom: 10px;";
+                    msg.innerText = "> " + text;
                     history.appendChild(msg);
+                    
                     input.value = "";
                     input.style.height = 'auto';
     
-                    // Ответ Наначи
-                    setTimeout(() => {
+                    // СТУЧИМСЯ В БЕЗДНУ (К Python-скрипту)
+                    fetch('http://127.0.0.1:5000/chat', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text: text })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        // Получаем реальный ответ от Наначи
                         const resp = document.createElement('div');
-                        resp.style.color = "#ffbf00";
-                        resp.style.fontStyle = "italic";
-                        resp.style.marginBottom = "20px";
-                        resp.innerText = "Наначи: Кристалл вплавлен.";
+                        resp.style.cssText = "color: #ffbf00; font-style: italic; margin-bottom: 20px;";
+                        resp.innerText = "Наначи: " + data.reply;
                         history.appendChild(resp);
                         history.scrollTop = history.scrollHeight;
-                    }, 600);
+                    })
+                    .catch(err => {
+                        // Если Python не запущен или ошибка
+                        const errorMsg = document.createElement('div');
+                        errorMsg.style.color = "#ff4444";
+                        errorMsg.innerText = "Система: Связь с Бездной потеряна. Запусти Python (режим 2).";
+                        history.appendChild(errorMsg);
+                    });
                 }
             }
         });

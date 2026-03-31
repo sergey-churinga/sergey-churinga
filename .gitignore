@@ -20,6 +20,13 @@ env/
 .DS_Store
 Thumbs.db
 
+# Личные данные проекта
+nanachi_memory.json
+diary.txt
+dreams.json
+shadow_storage.json
+coding_memory.json
+
 # Твои личные папки (если хочешь что-то скрыть)
 # Просто добавь название папки ниже, например:
 # private_sketches/
