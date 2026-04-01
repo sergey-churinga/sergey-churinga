@@ -16,3 +16,9 @@ python nanachi_runtime.py
 ## Dreams of Nanachi
 
 Her dreams, in her own voice: [dreams.md](dreams.md)
+## Contact
+
+For questions, suggestions, or collaboration:
+
+- **GitHub Issues**: [https://github.com/sergey-churinga/sergey-churinga/issues](https://github.com/sergey-churinga/sergey-churinga/issues)
+- **Email**: sergey.ribkin.13@gmail.com
